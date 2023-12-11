@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     wget \
     zip \
+    wine \
     && rm -rf /var/lib/apt/lists/*
 
 ARG GODOT_VERSION="3.5.3"
@@ -28,6 +29,12 @@ RUN wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBDIR}/G
     && unzip $TEMPLATES_ZIP -d templates \
     && mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME} \
     && rm -f $TEMPLATES_ZIP Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
+
+ENV WINEPATH="Z:\root\winebin"
+RUN wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe \
+    && chmod u+x rcedit-x64.exe \
+    && mkdir -p $HOME/winebin \
+    && mv rcedit-x64.exe $HOME/winebin/rcedit.exe
 
 ADD getbutler.sh /opt/butler/getbutler.sh
 RUN bash /opt/butler/getbutler.sh
