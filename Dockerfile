@@ -6,18 +6,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     git \
-    git-lfs \
-    python \
-    python-openssl \
+    python3 \
+    python3-openssl \
+    python-is-python3 \
     unzip \
     wget \
     zip \
-    adb \
-    openjdk-11-jdk-headless \
-    rsync \
     && rm -rf /var/lib/apt/lists/*
-
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 ARG GODOT_VERSION="3.5.3"
 ARG RELEASE_NAME="stable"
