@@ -15,27 +15,17 @@ RUN apt-get install -y --no-install-recommends \
     unzip \
     wget \
     zip \
-    wine \
     xz-utils
 RUN rm -rf /var/lib/apt/lists/*
 
-ARG GODOT_VERSION="3.6.2"
-ARG RELEASE_NAME="stable"
+ARG GODOT_VERSION="3.7"
+ARG RELEASE_NAME="dev1"
 
 RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-${RELEASE_NAME}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip \
     && mkdir ~/.cache \
     && unzip Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip \
     && mv Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64 /usr/local/bin/godot \
     && rm -f Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip
-
-# setup wine for rcedit
-ENV WINEPATH="Z:\root\winebin"
-ENV WINEPREFIX="/root/.wine"
-RUN wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe \
-    && chmod u+x rcedit-x64.exe \
-    && mkdir -p $HOME/winebin \
-    && mkdir -p $HOME/.wine \
-    && mv rcedit-x64.exe $HOME/winebin/rcedit.exe
 
 # Setup godotpcktool
 RUN wget https://github.com/hhyyrylainen/GodotPckTool/releases/download/v2.1/godotpcktool \
