@@ -8,6 +8,7 @@ RUN apt-get install -y --no-install-recommends \
     xvfb libxcursor-dev libxinerama-dev libxi-dev \
     ca-certificates \
     git \
+    git-lfs \
     python3 \
     python3-openssl \
     python-is-python3 \
@@ -18,10 +19,10 @@ RUN apt-get install -y --no-install-recommends \
     xz-utils
 RUN rm -rf /var/lib/apt/lists/*
 
-ARG GODOT_VERSION="3.6.1"
+ARG GODOT_VERSION="3.6.2"
 ARG RELEASE_NAME="stable"
 
-RUN wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${RELEASE_NAME}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip \
+RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-${RELEASE_NAME}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip \
     && mkdir ~/.cache \
     && unzip Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64.zip \
     && mv Godot_v${GODOT_VERSION}-${RELEASE_NAME}_x11.64 /usr/local/bin/godot \
